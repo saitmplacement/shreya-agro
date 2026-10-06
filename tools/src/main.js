@@ -74,7 +74,7 @@
     activeModal = modal;
     var f = focusables(modal.querySelector('.modal-dialog'));
     var firstField = f.filter(function (el) { return /^(INPUT|SELECT|TEXTAREA)$/.test(el.tagName) && !el.closest('.hp'); })[0];
-    window.setTimeout(function () { (firstField || f[0] || modal).focus({ preventScroll: true }); }, 30);
+    (firstField || f[0] || modal).focus({ preventScroll: true });
   }
   function closeModal() {
     if (!activeModal) return;
@@ -456,5 +456,41 @@
     });
     var cc = $('#chatClose');
     if (cc) cc.addEventListener('click', function () { closeChat(); chatFab.focus(); });
+  }
+
+  /* ---------- Global presence orbit: highlight the country nearest the top ---------- */
+  var orbit = $('#orbit');
+  if (orbit) {
+    var orbitTrack = $('.orbit-track', orbit);
+    var items = $$('li', orbitTrack);
+    var tipName = $('#orbitTipName');
+    var tipFlag = $('#orbitTipFlag');
+    var current = null;
+    var updateOrbit = function () {
+      var rot = 0;
+      var m = /matrix\(([^)]+)\)/.exec(window.getComputedStyle(orbitTrack).transform || '');
+      if (m) { var v = m[1].split(','); rot = Math.atan2(parseFloat(v[1]), parseFloat(v[0])) * 180 / Math.PI; }
+      var best = items[0], bestDiff = 999;
+      items.forEach(function (li) {
+        var a = parseFloat(li.style.getPropertyValue('--a')) + rot; // 0deg = 3 o'clock, 270deg = top
+        var diff = Math.abs(((a - 270) % 360 + 540) % 360 - 180);
+        if (diff < bestDiff) { bestDiff = diff; best = li; }
+      });
+      if (best === current) return;
+      if (current) current.classList.remove('is-active');
+      current = best;
+      best.classList.add('is-active');
+      tipName.textContent = best.getAttribute('data-name');
+      tipFlag.src = best.getAttribute('data-flag');
+    };
+    updateOrbit();
+    var timer = null;
+    var run = function (on) {
+      if (on && !timer) timer = window.setInterval(updateOrbit, 400);
+      if (!on && timer) { window.clearInterval(timer); timer = null; }
+    };
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) { run(entries[0].isIntersecting); }).observe(orbit);
+    } else { run(true); }
   }
 })();

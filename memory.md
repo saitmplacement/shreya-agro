@@ -13,7 +13,7 @@ Fully static B2B catalogue website for Shreya Agro Foods Ltd. (Mumbai). Goal: fa
 
 ## Brief → implementation map
 - Nav: Home | About Us | Products | Vendor | Contact Us (+ Enquire Now). Careers lives inside Contact (`/contact-us/#careers`); `/careers/` redirects there.
-- Font: Plus Jakarta Sans only. Palette: deep green, lime accent, `#F7F9F4` background, charcoal text.
+- Fonts: Plus Jakarta Sans (body/UI) + Playfair Display (headings) + Great Vibes (script accent), matching the mockups. Palette: deep green, lime accent, cream backgrounds, pastel category tints.
 - Products page = hero → categories → search/filter/grid → B2B CTA. Product page = breadcrumb → gallery + info table → why choose → related → CTA. Enquiry popup shows "Enquiry For: <product>".
 - Chatbot: guided menu (no fake AI replies) → opens forms, links, call/WhatsApp/email.
 

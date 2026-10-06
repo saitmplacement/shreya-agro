@@ -11,20 +11,20 @@ Built to the "On-Page SEO & Website Performance Guidelines" and the page designs
 | `/` | Home |
 | `/about-us/` | About (hero, intro, vision/mission, why us, journey timeline, quality, B2B CTA) |
 | `/products/` | Products (hero, categories, search + category/sub-category filters, product grid, CTA) |
-| `/products/<slug>/` | 18 product pages (gallery, spec table, why choose, related, enquiry) |
+| `/products/<slug>/` | 18 product pages (gallery, spec table, why choose, related, enquiry), grouped into 8 categories |
 | `/vendor/` | Vendor / B2B partner page with partner form + brochure download |
 | `/contact-us/` | Contact + Careers combined (enquiry form, openings, application popup, map) |
 | `/careers/` | Short URL → redirects to `/contact-us/#careers` |
 | `404.html` | Custom 404 (served with a real 404 status via `.htaccess`) |
 
-Site-wide: sticky header, green chatbot (Product Enquiry / B2B Partnership / Become a Distributor / Careers / Talk to Our Team), B2B enquiry popup that auto-fills "Enquiry For: <product>".
+Home also has the rotating "From India to the World" country circle (CSS animation; flags come from the MIT-licensed `flag-icons` set in `assets/flags/`). Site-wide: sticky header, green chatbot (Product Enquiry / B2B Partnership / Become a Distributor / Careers / Talk to Our Team), B2B enquiry popup that auto-fills "Enquiry For: <product>".
 
 ## Stack & conventions
 
-- **Font:** Plus Jakarta Sans only (self-hosted variable font, weights 400–800, `font-display: swap`).
+- **Fonts (self-hosted, `font-display: swap`):** Plus Jakarta Sans for UI/body text, Playfair Display for headings and Great Vibes for the script accent (e.g. "Under One Roof") — as in the approved mockups. To go back to a single font, remove the two extra `@font-face` blocks and `--font-display` in `tools/src/style.css`.
 - **Images:** WebP only, responsive (`srcset`/`sizes`), explicit width/height, lazy-loaded below the fold; hero is eager + preloaded. Descriptive names: `shreya-agro-foods-<name>-<width>.webp`. Social-share images live in `assets/images/og/` (1200×630 JPG).
 - **SEO:** unique title/description/canonical/OG per page, one H1, Organization + WebSite (home), Product + BreadcrumbList (product pages), LocalBusiness (contact), `sitemap.xml`, `robots.txt`, HTTPS + www redirect in `.htaccess`.
-- **Colour:** deep green + one lime accent on neutral backgrounds (`#F7F9F4`).
+- **Colour:** deep green + lime accent on cream/white; the 8 category cards use soft pastel tints (as in the mockup).
 
 ## Editing content (source of truth)
 

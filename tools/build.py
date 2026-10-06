@@ -50,29 +50,33 @@ MAP_SRC = "https://www.google.com/maps?q=Royal+Palms,+Aarey+Milk+Colony,+Goregao
 # Catalogue data
 # --------------------------------------------------------------------------------------
 CATEGORIES = [
-    dict(slug="masalas", name="Masalas & Spices", img="spices-still-life",
-         desc="Authentic spice powders and masala blends for richer flavours."),
-    dict(slug="pickles", name="Pickles & Chutneys", img="mango-pickle",
-         desc="Traditional taste, made with time-honoured recipes."),
-    dict(slug="sweets", name="Sweets & Jaggery", img="gulab-jamun-rasgulla",
-         desc="Soan papdi, mithai, candy and natural jaggery for every celebration."),
-    dict(slug="jams", name="Jams, Sauces & Pastes", img="mix-fruit-jam",
-         desc="Fruit jam, ketchup and kitchen pastes made for everyday cooking."),
-    dict(slug="flour", name="Flour, Rice & Grains", img="wheat-flour-kitchen",
-         desc="Atta, besan and basmati rice — everyday staples, consistently milled and packed."),
-    dict(slug="bakery", name="Bakery & Biscuits", img="rusk-toast-tea-time",
-         desc="Crisp rusk and biscuits made for tea-time."),
+    dict(slug="masalas", name="Masalas", icon="leaf", img="spices-still-life", blend=False,
+         desc="Authentic spices for richer flavours.", bg="#fdf6e6,#fbe6c6", ink="#1c5b3f", badge="#e3efe6"),
+    dict(slug="pickles", name="Pickles", icon="jar", img="mango-pickle", blend=False,
+         desc="Traditional taste, made with care.", bg="#f0f6e6,#dcebc9", ink="#2f7a4d", badge="#e0efd3"),
+    dict(slug="sweets", name="Sweets", icon="cupcake", img="gulab-jamun-rasgulla", blend=True,
+         desc="Sweet moments, made special.", bg="#fdeff0,#f9d8de", ink="#c0394f", badge="#fbdfe3"),
+    dict(slug="soan-papdi", name="Soan Papdi", icon="package", img="soan-papdi-collection", blend=True,
+         desc="Light, flaky and delicious.", bg="#fdf6e0,#f8e8b8", ink="#a9780f", badge="#faeec6"),
+    dict(slug="jams", name="Jams", icon="jar", img="mix-fruit-jam", blend=True,
+         desc="Pure fruit goodness in every bite.", bg="#fdeeed,#f8d2d2", ink="#b6313c", badge="#fbdcdc"),
+    dict(slug="besan", name="Besan & Grains", icon="wheat", img="besan-chakki-atta", blend=True,
+         desc="Pure, nutritious and versatile.", bg="#fcf4e2,#f2e2b8", ink="#a9780f", badge="#f7e9c4"),
+    dict(slug="jaggery", name="Jaggery", icon="cube", img="jaggery-cubes-powder", blend=False,
+         desc="Natural sweetness, with goodness.", bg="#ebf4e7,#d5e8cc", ink="#2d7a4f", badge="#dcecd3"),
+    dict(slug="rusk", name="Rusk & Biscuits", icon="bread", img="rusk-toast-display", blend=False,
+         desc="Crispy, crunchy, perfect with tea.", bg="#ecf4fb,#d2e5f6", ink="#2c6aa0", badge="#d9e9f7"),
 ]
 CAT = {c["slug"]: c for c in CATEGORIES}
 
 PRODUCTS = [
-    dict(slug="basmati-rice", name="Premium Basmati Rice", cat="flour", type="Rice", packs="1kg, 5kg, 25kg",
+    dict(slug="basmati-rice", name="Premium Basmati Rice", cat="besan", type="Rice", packs="1kg, 5kg, 25kg",
          short="Extra-long grain basmati rice, naturally aged for 12 months to enhance its aroma, texture, and flavour.",
          images=[("basmati-rice", "Premium Basmati Rice pack with cooked rice"), ("rice-sack", "Premium Basmati Rice in a jute sack")]),
-    dict(slug="besan-flour", name="Besan Chakki Ka Atta", cat="flour", type="Flour", packs="500g, 1kg, 30kg",
+    dict(slug="besan-flour", name="Besan Chakki Ka Atta", cat="besan", type="Flour", packs="500g, 1kg, 30kg",
          short="Made from 100% pure Bengal gram (chana dal) finely milled for a smooth, lump-free texture.",
          images=[("besan-chakki-atta", "Besan Chakki Ka Atta pack")]),
-    dict(slug="wheat-flour-atta", name="Wheat Flour (Chakki Atta)", cat="flour", type="Flour", packs="",
+    dict(slug="wheat-flour-atta", name="Wheat Flour (Chakki Atta)", cat="besan", type="Flour", packs="",
          short="100% whole wheat stone ground goodness. Rich in fiber and natural nutrition.",
          images=[("wheat-flour-atta", "Wheat Flour Chakki Atta packs with fresh rotis"), ("wheat-flour-kitchen", "Wheat Flour Chakki Atta in a kitchen setting")]),
     dict(slug="chicken-masala", name="Chicken & Meat Masalas", cat="masalas", type="Cooking Masala", packs="50g, 100g, 250g, 500g, 1kg, 5kg",
@@ -93,7 +97,7 @@ PRODUCTS = [
     dict(slug="gulab-jamun-rasgulla", name="Gulab Jamun & Rasgulla", cat="sweets", type="Indian Sweets", packs="500g, 1kg",
          short="Timeless taste of traditional Indian desserts, soft and syrup-soaked.",
          images=[("gulab-jamun-rasgulla", "Gulab Jamun and Rasgulla tins")]),
-    dict(slug="soan-papdi-assorted", name="Assorted Soan Papdi", cat="sweets", type="Soan Papdi", packs="180g, 200g",
+    dict(slug="soan-papdi-assorted", name="Assorted Soan Papdi", cat="soan-papdi", type="Soan Papdi", packs="180g, 200g",
          short="Crisp and flaky traditional sweet in assorted flavors.",
          images=[("soan-papdi-collection", "Assorted flavours of Soan Papdi"), ("soan-papdi-box", "Soan Papdi box with pieces")]),
     dict(slug="hardball-candy", name="Hardball Candy", cat="sweets", type="Candy", packs="Available in jars",
@@ -102,7 +106,7 @@ PRODUCTS = [
     dict(slug="chikki", name="Chikki", cat="sweets", type="Chikki", packs="",
          short="Crunchy, nutty chikki made for everyday snacking and festive gifting.",
          images=[("chikki", "Shreya Chikki with nuts and jaggery")]),
-    dict(slug="jaggery", name="Jaggery Cubes & Powder", cat="sweets", type="Jaggery", packs="500g",
+    dict(slug="jaggery", name="Jaggery Cubes & Powder", cat="jaggery", type="Jaggery", packs="500g",
          short="Natural sweetener made from pure sun-ripened sugarcane juice.",
          images=[("jaggery-cubes-powder", "Jaggery cubes and jaggery powder jars"), ("jaggery-jars", "Jaggery cubes and powder in jars")]),
     dict(slug="mix-fruit-jam", name="Mix Fruit Jam", cat="jams", type="Jam", packs="250g, 500g, 1kg",
@@ -114,10 +118,10 @@ PRODUCTS = [
     dict(slug="ginger-garlic-paste", name="Ginger & Garlic Paste", cat="jams", type="Paste", packs="500g, 1kg, 5kg",
          short="Balanced blend of fresh ginger and garlic processed to a fine, smooth texture.",
          images=[("ginger-garlic-paste", "Ginger and garlic paste jars with fresh ginger and garlic")]),
-    dict(slug="rusk-toast", name="Rusk Toast (Elaichi & Milty Flavour)", cat="bakery", type="Rusk", packs="",
+    dict(slug="rusk-toast", name="Rusk Toast (Elaichi & Milty Flavour)", cat="rusk", type="Rusk", packs="",
          short="Crunchy and tasty Rusk Toast perfect for your tea-time. Available in Elaichi and Milty flavors.",
          images=[("rusk-toast-tea-time", "Elaichi and Milty rusk toast with tea"), ("rusk-toast-display", "Rusk toast packs and slices")]),
-    dict(slug="biscuits", name="Biscuits", cat="bakery", type="Biscuits", packs="",
+    dict(slug="biscuits", name="Biscuits", cat="rusk", type="Biscuits", packs="",
          short="Crisp, tasty biscuits and cookies for tea-time and everyday snacking.",
          images=[("biscuits", "Assorted biscuits and cookies with milk")]),
 ]
@@ -181,6 +185,16 @@ ICON_PATHS = {
     "download": '<path d="M12 3v12M7 10l5 5 5-5M4 21h16"/>',
     "package": '<path d="M21 8l-9-5-9 5v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/>',
     "globe": '<circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/>',
+    "jar": '<path d="M8 3h8v3H8z"/><path d="M6 6h12v2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2z"/><path d="M8 13h8"/>',
+    "cupcake": '<path d="M5 12h14l-1.5 8h-11z"/><path d="M6.5 12a5.5 5.5 0 0 1 11 0M12 4v2.5"/>',
+    "wheat": '<path d="M12 22V9"/><path d="M12 9c0-3 2-5 4-5 0 3-1 5-4 5zM12 9c0-3-2-5-4-5 0 3 1 5 4 5zM12 15c0-3 2-5 4-5 0 3-1 5-4 5zM12 15c0-3-2-5-4-5 0 3 1 5 4 5z"/>',
+    "cube": '<path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 12l8-4.5M12 12L4 7.5M12 12v9"/>',
+    "bread": '<path d="M5 10a4 4 0 0 1 2-7h10a4 4 0 0 1 2 7v9a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1z"/>',
+    "user": '<circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/>',
+    "building": '<rect x="4" y="3" width="16" height="18" rx="1.5"/><path d="M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2"/>',
+    "grid": '<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
+    "shield-check": '<path d="M12 3l8 3v6c0 4.6-3.3 8.3-8 9-4.7-.7-8-4.4-8-9V6l8-3z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>',
+    "leaf-deco": '<path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.2 2 8 0 5.5-4.8 10-10 10z"/>',
     "facebook": '<path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>',
     "instagram": '<rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>',
     "linkedin": '<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2zM4 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4z"/>',
@@ -384,33 +398,37 @@ def footer():
 </footer>"""
 
 
-def field(label, name, ftype="text", required=False, placeholder="", fid=None, autocomplete=None, extra=""):
+def _wrap(icon, control):
+    return f'<div class="input-wrap">{ic(icon)}{control}</div>' if icon else control
+
+
+def field(label, name, ftype="text", required=False, placeholder="", fid=None, autocomplete=None, extra="", icon=None):
     fid = fid or name
     req = ' <span class="req" aria-hidden="true">*</span>' if required else ""
     r = " required" if required else ""
     ac = f' autocomplete="{autocomplete}"' if autocomplete else ""
     inputmode = ' inputmode="tel"' if ftype == "tel" else ""
-    return (f'<div class="field"><label for="{fid}">{label}{req}</label>'
-            f'<input type="{ftype}" id="{fid}" name="{name}"{r} placeholder="{q(placeholder)}"{ac}{inputmode} aria-describedby="{fid}_err"{extra}>'
+    control = f'<input type="{ftype}" id="{fid}" name="{name}"{r} placeholder="{q(placeholder)}"{ac}{inputmode} aria-describedby="{fid}_err"{extra}>'
+    return (f'<div class="field"><label for="{fid}">{label}{req}</label>{_wrap(icon, control)}'
             f'<p class="field-error" id="{fid}_err" role="alert" hidden></p></div>')
 
 
-def textarea(label, name, required=False, placeholder="", fid=None, rows=3):
+def textarea(label, name, required=False, placeholder="", fid=None, rows=3, icon=None):
     fid = fid or name
     req = ' <span class="req" aria-hidden="true">*</span>' if required else ""
     r = " required" if required else ""
-    return (f'<div class="field"><label for="{fid}">{label}{req}</label>'
-            f'<textarea id="{fid}" name="{name}" rows="{rows}"{r} placeholder="{q(placeholder)}" aria-describedby="{fid}_err"></textarea>'
+    control = f'<textarea id="{fid}" name="{name}" rows="{rows}"{r} placeholder="{q(placeholder)}" aria-describedby="{fid}_err"></textarea>'
+    return (f'<div class="field"><label for="{fid}">{label}{req}</label>{_wrap(icon, control)}'
             f'<p class="field-error" id="{fid}_err" role="alert" hidden></p></div>')
 
 
-def select(label, name, options, required=False, fid=None, placeholder="Select an option"):
+def select(label, name, options, required=False, fid=None, placeholder="Select an option", icon=None):
     fid = fid or name
     req = ' <span class="req" aria-hidden="true">*</span>' if required else ""
     r = " required" if required else ""
     opts = f'<option value="">{e(placeholder)}</option>' + "".join(f'<option value="{q(o)}">{e(o)}</option>' for o in options)
-    return (f'<div class="field"><label for="{fid}">{label}{req}</label>'
-            f'<select id="{fid}" name="{name}"{r} aria-describedby="{fid}_err">{opts}</select>'
+    control = f'<select id="{fid}" name="{name}"{r} aria-describedby="{fid}_err">{opts}</select>'
+    return (f'<div class="field"><label for="{fid}">{label}{req}</label>{_wrap(icon, control)}'
             f'<p class="field-error" id="{fid}_err" role="alert" hidden></p></div>')
 
 
@@ -572,6 +590,7 @@ def page(path, *, title, desc, body, active="", og_key="hero-desktop", schema=""
 <link rel="icon" type="image/png" sizes="192x192" href="/assets/images/shreya-agro-foods-icon-192.png">
 <link rel="apple-touch-icon" href="/assets/images/shreya-agro-foods-apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/plus-jakarta-sans-variable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/playfair-display.woff2" as="font" type="font/woff2" crossorigin>
 {preload}
 <link rel="stylesheet" href="/assets/css/style.css?v={ASSET_V}">
 {schema}
@@ -609,10 +628,17 @@ def section_head(eyebrow, h2, p="", center=False, split_link=None):
 
 def category_card(c, lazy=True):
     n = sum(1 for p in PRODUCTS if p["cat"] == c["slug"])
-    return (f'<a class="category-card" href="/products/?category={c["slug"]}">'
-            f'<div class="category-media">{img(c["img"], f"{BRAND} {c["name"]}", sizes="(min-width:992px) 380px, (min-width:640px) 45vw, 92vw", lazy=lazy)}</div>'
-            f'<div class="category-body"><span class="category-count">{n} products</span><h3>{e(c["name"])}</h3><p>{e(c["desc"])}</p>'
-            f'<span class="link-arrow">View Products {ARROW}</span></div></a>')
+    bg1, bg2 = c["bg"].split(",")
+    media_cls = "cat-media blend" if c["blend"] else "cat-media"
+    return (f'<a class="cat-card" href="/products/?category={c["slug"]}" aria-label="{q(c["name"])} — {n} product{"s" if n != 1 else ""}" '
+            f'style="--bg1:{bg1};--bg2:{bg2};--ink:{c["ink"]};--badge:{c["badge"]}">'
+            f'<div class="cat-text"><span class="cat-badge">{ic(c["icon"])}</span><h3>{e(c["name"])}</h3><p>{e(c["desc"])}</p>'
+            f'<span class="cat-btn">View Products {ARROW}</span></div>'
+            f'<div class="{media_cls}">{img(c["img"], f"{BRAND} {c["name"]}", sizes="(min-width:1100px) 190px, (min-width:640px) 220px, 46vw", lazy=lazy)}</div></a>')
+
+
+def category_grid(lazy=True):
+    return '<div class="cat-grid">' + "".join(category_card(c, lazy=lazy) for c in CATEGORIES) + "</div>"
 
 
 def product_card(p, lazy=True):
@@ -672,20 +698,23 @@ def build_home():
 <div class="stat"><strong>7</strong><span>Countries &amp; growing</span></div>
 <div class="stat"><strong>B2B</strong><span>Wholesale &amp; distribution</span></div>
 </div></section>"""
-    cats = (f'<section class="section" id="categories"><div class="container">'
-            + section_head("Our Product Categories", "A World of Flavours, Under One Roof",
-                           "From everyday meals to festive celebrations, our wide range of products brings flavour, nutrition and tradition to your table.",
-                           split_link=("View all products", "/products/"))
-            + '<div class="grid grid-3">' + "".join(category_card(c) for c in CATEGORIES) + '</div></div></section>')
+    cats = f"""<section class="section cats-section" id="categories"><div class="container"><div class="cat-panel">
+{ic("leaf-deco", "leaf-deco")}
+<div class="cat-head"><div><span class="eyebrow with-line">Our Product Categories</span>
+<h2>A World of Flavours, <span class="script">Under One Roof</span></h2>
+<p>From everyday meals to festive celebrations, our wide range of products brings flavour, nutrition and tradition to your table.</p></div>
+<a class="pill-link" href="/products/">View All Products {ARROW}</a></div>
+{category_grid()}
+</div></div></section>"""
     popular = (f'<section class="section section-alt"><div class="container">'
                + section_head("Our Popular Products", "Loved for Their Taste, Trusted for Their Quality",
                               "A few favourites from our catalogue. Every product is available for B2B, wholesale and distribution enquiries.",
                               split_link=("Explore our FMCG products", "/products/"))
                + '<div class="product-grid">' + "".join(product_card(PROD[s]) for s in POPULAR) + '</div></div></section>')
-    quality = f"""<section class="section"><div class="container two-col">
+    quality = f"""<section class="section quality-section"><div class="container two-col">
 <div class="media-frame">{img("quality-facility", "Shreya Agro Foods quality team inspecting jars on the production line", sizes="(min-width:860px) 560px, 92vw")}</div>
 <div>
-<span class="eyebrow">Our Commitment</span>
+<span class="eyebrow with-dot">Our Commitment</span>
 <h2>Quality You Can Trust</h2>
 <p>Every product is crafted with care, using 100% natural ingredients, subjected to rigorous lab-tested purity, and released only when it meets our highest standards of taste, nutrition and safety.</p>
 <ul class="icon-row">
@@ -697,15 +726,26 @@ def build_home():
 </ul>
 <p style="margin-top:24px"><a class="btn btn-outline" href="/about-us/">Learn about Shreya Agro Foods {ARROW}</a></p>
 </div></div></section>"""
-    countries = ["India", "Nepal", "Bangladesh", "Bhutan", "UAE", "South Africa", "Canada"]
-    global_sec = f"""<section class="section on-dark"><div class="container two-col">
+    countries = [("India", "IN", "in.svg"), ("Nepal", "NP", "np.svg"), ("Bangladesh", "BD", "bd.svg"), ("Bhutan", "BT", "bt.webp"),
+                 ("UAE", "AE", "ae.svg"), ("South Africa", "ZA", "za.svg"), ("Canada", "CA", "ca.svg")]
+    nodes = "".join(
+        f'<li style="--a:{round(i * 360 / len(countries), 2)}deg" data-name="{n}" data-flag="/assets/flags/{f}"><span class="orbit-pos"><span class="orbit-node">'
+        f'<b>{code}</b><span class="orbit-label">{n}</span></span></span></li>'
+        for i, (n, code, f) in enumerate(countries))
+    global_sec = f"""<section class="section on-dark global-sec"><div class="container two-col">
 <div>
-<span class="eyebrow">Global Presence</span>
+<span class="eyebrow with-dot">Global Presence</span>
 <h2>From India to the World</h2>
 <p>Our products are enjoyed in Nepal, Bangladesh, Bhutan, UAE, South Africa, Canada and beyond, with ambitious expansion plans to reach more homes worldwide.</p>
-<ul class="country-list">{"".join(f"<li>{c}</li>" for c in countries)}</ul>
+<p><a class="btn btn-ghost" href="/contact-us/">Our Global Reach {ARROW}</a></p>
 </div>
-<div class="globe-card"><strong>7</strong><span>Countries &amp; growing</span></div>
+<div class="orbit-wrap"><div class="orbit" id="orbit" role="img" aria-label="Shreya Agro Foods products are enjoyed in India, Nepal, Bangladesh, Bhutan, UAE, South Africa and Canada">
+<span class="orbit-glow" aria-hidden="true"></span><span class="orbit-ring" aria-hidden="true"></span><span class="orbit-ring dashed" aria-hidden="true"></span>
+<ul class="orbit-track" aria-hidden="true">{nodes}</ul>
+<span class="orbit-line" aria-hidden="true"></span>
+<div class="orbit-tip" aria-hidden="true"><strong id="orbitTipName">Canada</strong><img id="orbitTipFlag" src="/assets/flags/ca.svg" alt="" width="20" height="15"><small>Connection Established</small></div>
+<div class="orbit-center"><span class="orbit-globe" aria-hidden="true"></span><strong>7 Countries</strong><span>&amp; Growing</span></div>
+</div></div>
 </div></section>"""
     cta = cta_band("Bring Shreya to Your Market", "Partner with us for distribution and business opportunities across India and beyond.",
                    secondary=("Contact Us", "/contact-us/"))
@@ -781,7 +821,7 @@ def build_products():
 </div></section>"""
     cats = ('<section class="section" id="categories"><div class="container">'
             + section_head("Product Categories", "Explore Our Product Categories", "Choose a category to browse the products inside it.")
-            + '<div class="grid grid-3">' + "".join(category_card(c) for c in CATEGORIES) + '</div></div></section>')
+            + category_grid() + '</div></section>')
     chips = '<button type="button" class="chip" data-filter="all" aria-pressed="true">All Products</button>' + "".join(
         f'<button type="button" class="chip" data-filter="{c["slug"]}" aria-pressed="false">{e(c["name"])}</button>' for c in CATEGORIES)
     listing = f"""<section class="section section-alt" id="all-products"><div class="container">
@@ -885,59 +925,72 @@ def build_product(p):
 
 
 def build_vendor():
-    hero = f"""<section class="page-hero"><div class="container two-col">
+    hero = f"""<section class="vh"><div class="container vh-grid">
 <div>
-<span class="eyebrow">B2B Partner</span>
-<h1>Partner with Shreya Agro Foods</h1>
-<p class="lead">Join hands with a trusted FMCG brand, delivering quality food products across India. We welcome distributors, wholesalers, retailers and business partners to grow together.</p>
-<div class="hero-actions"><a class="btn btn-accent" href="#partner-form">Become a Partner {ARROW}</a><a class="btn btn-outline-light" href="/assets/images/brochure.pdf" download>Download Brochure {ic("download", "arrow")}</a></div>
+<span class="pill-eyebrow">B2B PARTNER</span>
+<h1>Partner with <em>Shreya Agro Foods</em></h1>
+<p class="vh-lead">Join hands with a trusted FMCG brand, delivering quality food products across India. We welcome distributors, wholesalers, retailers and business partners to grow together.</p>
+<div class="hero-actions"><a class="btn btn-primary" href="#partner-form">Become a Partner {ARROW}</a><a class="btn btn-outline" href="/assets/images/brochure.pdf" download>Download Brochure {ic("download", "arrow")}</a></div>
 </div>
-<div class="media-frame" style="max-width:420px;margin-left:auto">{img("hero-mobile", "Shreya Agro Foods products in front of the Shreya facility", sizes="(min-width:860px) 420px, 92vw", lazy=False, fetchpriority="high")}</div>
+<div class="vh-media">{img("hero-desktop", "Shreya Agro Foods products — jam, masala and soan papdi in front of the Shreya facility", sizes="(min-width:900px) 600px, 92vw", lazy=False, fetchpriority="high", cls="vh-img")}<span class="script vh-script">Quality Products<br>Greater Together</span></div>
 </div></section>"""
-    strip = ('<section class="stats-strip"><div class="container"><div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:0">'
-             + "".join(f'<div class="stat" style="border-right:0"><div style="color:var(--primary);display:flex;justify-content:center;margin-bottom:8px"><span style="width:34px;height:34px">{ic(i)}</span></div><strong style="font-size:1.1rem">{t}</strong><span>{d}</span></div>'
-                       for i, t, d in [("shield", "Trusted Brand", "26+ years of experience"), ("truck", "Pan India Supply", "Wide distribution network"),
+    trust = ('<section class="trust-row" aria-label="Why partner with Shreya Agro Foods"><div class="container trust-grid">'
+             + "".join(f'<div class="trust-item"><span class="round-icon">{ic(i)}</span><h3>{t}</h3><p>{d}</p></div>'
+                       for i, t, d in [("shield-check", "Trusted Brand", "26+ years of experience"), ("truck", "Pan India Supply", "Wide distribution network"),
                                        ("award", "Consistent Quality", "From factory to your shelves"), ("users", "Long Term Partnership", "Grow together, succeed together"),
                                        ("headset", "Dedicated Support", "Always here for you")])
-             + '</div></div></section>')
-    rng = ('<section class="section"><div class="container">'
-           + section_head("Our Products", "Wide Range of Quality Products", "From everyday essentials to traditional favourites, our diverse product range is crafted with care and delivered with trust.",
-                          split_link=("View all products", "/products/"))
-           + '<div class="grid grid-3">' + "".join(category_card(c) for c in CATEGORIES) + '</div></div></section>')
-    grow = [("award", "Premium Quality Products", "High standards, always."), ("trend", "Competitive Pricing", "Better margins, higher growth."),
-            ("truck", "Reliable Supply Chain", "On-time, every time."), ("bulb", "Marketing Support", "Tools to help you sell more.")]
-    grow_html = "".join(f'<div class="feature-card"><div class="icon">{ic(i)}</div><h3>{t}</h3><p>{d}</p></div>' for i, t, d in grow)
-    form = f"""<section class="section section-tint" id="partner-form"><div class="container two-col" style="align-items:start">
-<div><span class="eyebrow">Why Partner With Us</span><h2>Your Growth, Our Support</h2>
+             + '</div></section>')
+    minis = "".join(
+        f'<a class="mini" href="/products/?category={c["slug"]}"><span class="mini-img">{img(c["img"], f"{BRAND} {c["name"]}", sizes="(min-width:1100px) 130px, (min-width:576px) 22vw, 44vw")}</span>'
+        f'<b>{e(c["name"])}</b><span class="mini-link">Explore {ARROW}</span></a>' for c in CATEGORIES)
+    rng = f"""<section class="section vp"><div class="container">
+<div class="cat-head"><div><span class="pill-eyebrow">OUR PRODUCTS</span><h2>Wide Range of Quality Products</h2>
+<p>From everyday essentials to traditional favourites, our diverse product range is crafted with care and delivered with trust.</p></div>
+<a class="link-arrow" href="/products/">View All Products {ARROW}</a></div>
+<div class="mini-grid">{minis}</div></div></section>"""
+    why_items = "".join(
+        f'<div class="why-item"><span class="round-icon sm">{ic(i)}</span><div><h3>{t}</h3><p>{d}</p></div></div>'
+        for i, t, d in [("award", "Premium Quality Products", "High standards, always."), ("trend", "Competitive Pricing", "Better margins, higher growth."),
+                        ("truck", "Reliable Supply Chain", "On-time, every time."), ("bulb", "Marketing Support", "Tools to help you sell more.")])
+    form = f"""<section class="section why" id="partner-form"><div class="container two-col" style="align-items:start">
+<div><span class="pill-eyebrow">WHY PARTNER WITH US</span><h2>Your Growth, Our Support</h2>
 <p>We are committed to building strong and lasting relationships with our business partners. Here is why you should partner with us:</p>
-<div class="grid grid-2" style="margin-top:24px">{grow_html}</div></div>
+<div class="why-items">{why_items}</div></div>
 <div class="form-card">
-<div id="partnerWrap"><h2 style="font-size:1.6rem">Become a B2B Partner</h2><p>Fill in your details and our team will get in touch with you shortly.</p>
+<div id="partnerWrap"><h2 style="font-size:1.5rem">Become a B2B Partner</h2><p>Fill in your details and our team will get in touch with you shortly.</p>
 <form id="partnerForm" data-form="partner" data-wrap="partnerWrap" data-success="partnerSuccess" data-subject="B2B partner enquiry — Shreya Agro Foods website" action="#">
 <input type="hidden" name="enquiry_type" value="Business Partnership">
 {HONEYPOT}
-{field("Full Name", "name", required=True, placeholder="Enter your name", fid="pt_name", autocomplete="name")}
-{field("Business Name", "company", required=True, placeholder="Enter business name", fid="pt_company", autocomplete="organization")}
-<div class="field-row">{field("Email", "email", "email", required=True, placeholder="Enter email", fid="pt_email", autocomplete="email")}{field("Phone Number", "mobile", "tel", required=True, placeholder="+91 XXXXX XXXXX", fid="pt_mobile", autocomplete="tel")}</div>
-{field("Location", "location", required=True, placeholder="City / State", fid="pt_location", autocomplete="address-level2")}
-{select("Business Type", "business_type", ["Distributor", "Wholesaler", "Retailer", "Other"], required=True, fid="pt_type", placeholder="Select business type")}
-{textarea("Message (optional)", "message", placeholder="Tell us about your business and the territory you cover", fid="pt_message")}
+{field("Full Name", "name", required=True, placeholder="Full Name", fid="pt_name", autocomplete="name", icon="user")}
+{field("Business Name", "company", required=True, placeholder="Business Name", fid="pt_company", autocomplete="organization", icon="building")}
+{field("Email Address", "email", "email", required=True, placeholder="Email Address", fid="pt_email", autocomplete="email", icon="mail")}
+{field("Phone Number", "mobile", "tel", required=True, placeholder="Phone Number", fid="pt_mobile", autocomplete="tel", icon="phone")}
+{field("Location", "location", required=True, placeholder="City / State", fid="pt_location", autocomplete="address-level2", icon="pin")}
+{select("Business Type", "business_type", ["Distributor", "Wholesaler", "Retailer", "Other"], required=True, fid="pt_type", placeholder="Select Business Type", icon="grid")}
+{textarea("Message (optional)", "message", placeholder="Message (Optional)", fid="pt_message", icon="chat")}
 <p class="form-status" role="alert" hidden></p>
 {submit_btn("Submit Enquiry")}
-<p class="form-note">Your information is safe with us.</p>
+<p class="form-note" style="display:flex;gap:6px;justify-content:center;align-items:center">{ic("shield-check", "note-icon")} Your information is safe with us.</p>
 </form></div>
 {success_box("partnerSuccess", text="Your enquiry has been received successfully. Our B2B team will contact you within 24 hours.")}
 </div></div></section>"""
-    steps = ('<section class="section"><div class="container">' + section_head("How It Works", "Simple Steps to Partner", center=True)
-             + '<div class="steps">'
-             + "".join(f'<div class="step"><h3>{t}</h3><p>{d}</p></div>' for t, d in [
-                 ("Submit Enquiry", "Tell us about your business needs."), ("Our Team Connects", "We will get in touch with you within 24 hours."),
-                 ("Agreement & Onboarding", "Complete the process and start your journey with us."), ("Start Growing", "Begin supply and grow together with our support.")])
-             + '</div></div></section>')
-    cta = cta_band("Have Questions About Partnering?", "Talk to our team about distribution, wholesale and business opportunities.", primary_label="Make a B2B Enquiry", secondary=("Contact Us", "/contact-us/"))
+    steps_data = [("file", "Submit Enquiry", "Tell us about your business needs."), ("phone", "Our Team Connects", "We will get in touch with you within 24 hours."),
+                  ("users", "Agreement & Onboarding", "Complete the process and start your journey with us."), ("trend", "Grow Together", "Begin supply and grow together with our support.")]
+    step_html = ""
+    for i, (ico, t, d) in enumerate(steps_data):
+        step_html += f'<div class="step2"><span class="num">{i + 1}</span><span class="step2-icon">{ic(ico if ico != "file" else "package")}</span><div><h3>{e(t)}</h3><p>{e(d)}</p></div></div>'
+        if i < len(steps_data) - 1:
+            step_html += f'<span class="step2-arrow" aria-hidden="true">{ic("arrow")}</span>'
+    steps = (f'<section class="section steps2-sec"><div class="container"><span class="pill-eyebrow">HOW IT WORKS</span><h2>Simple Steps to Partner</h2>'
+             f'<div class="steps2">{step_html}</div></div></section>')
+    strip = f"""<section class="cta-strip"><div class="container cta-strip-grid">
+<div class="cta-brand"><img src="/assets/images/shreya-agro-foods-logo-160.webp" alt="" width="160" height="116" loading="lazy" decoding="async"><div><strong>Shreya Agro Foods</strong><span>Quality Food &nbsp;|&nbsp; Trusted Partner &nbsp;|&nbsp; Growing Together</span></div></div>
+<div class="cta-text"><h2>Let's Build Something Great Together</h2><p>Partner with Shreya Agro Foods and bring quality food products to more homes across India.</p></div>
+<button type="button" class="btn btn-light" data-enquiry data-type="Business Partnership">Become a B2B Partner {ARROW}</button>
+</div></section>"""
     page("vendor/index.html", title="Become a B2B Partner | Shreya Agro Foods",
          desc="Partner with Shreya Agro Foods as a distributor, wholesaler or retailer. Explore our FMCG range and send a B2B partnership enquiry.",
-         body=hero + strip + rng + form + steps + cta, active="vendor", og_key="hero-desktop", sitemap_priority="0.8",
+         body=hero + trust + rng + form + steps + strip, active="vendor", og_key="hero-desktop", sitemap_priority="0.8",
          schema=jsonld(ORG_NODE, breadcrumb_node([("Home", "/"), ("Vendor", "/vendor/")])))
 
 
