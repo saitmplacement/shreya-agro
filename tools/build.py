@@ -168,6 +168,7 @@ ICON_PATHS = {
     "pin": '<path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>',
     "clock": '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
     "chat": '<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/>',
+    "bot": '<path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/>',
     "shield": '<path d="M12 3l8 3v6c0 4.6-3.3 8.3-8 9-4.7-.7-8-4.4-8-9V6l8-3z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>',
     "truck": '<path d="M1 6h12v10H1z"/><path d="M13 9h4l4 4v3h-8"/><circle cx="6" cy="18" r="2"/><circle cx="17" cy="18" r="2"/>',
     "award": '<circle cx="12" cy="9" r="6"/><path d="M8.5 14.5L7 22l5-3 5 3-1.5-7.5"/>',
@@ -393,7 +394,7 @@ def footer():
 <li>{ic("clock")}<span>Mon–Fri 10am–6pm<br>Sat 10am–2pm</span></li>
 </ul></div>
 </div>
-<div class="footer-bottom"><span>&copy; {YEAR} {COMPANY} All rights reserved.</span><span>Mumbai, Maharashtra, India</span></div>
+<div class="footer-bottom"><span>&copy; {YEAR} {COMPANY} All rights reserved.</span><span>Mumbai, Maharashtra, India</span><span>Designed & Managed by <a href="https://tcongsinfotech.com/" target="_blank" rel="noopener noreferrer">Tcongs Infotech</a></span></div>
 </div>
 </footer>"""
 
@@ -518,7 +519,7 @@ def apply_modal():
 
 
 def chatbot():
-    return f"""<button type="button" class="chat-fab" id="chatFab" aria-expanded="false" aria-controls="chatPanel" aria-label="Chat with us — how can we help?">{ic("chat")}<span class="label">Chat with us</span><span class="dot"></span></button>
+    return f"""<button type="button" class="chat-fab" id="chatFab" aria-expanded="false" aria-controls="chatPanel" aria-label="Chat with us — how can we help?">{ic("bot")}<span class="dot"></span></button>
 <div class="chat-panel" id="chatPanel" role="dialog" aria-label="Chat assistant" hidden>
 <div class="chat-head"><div><strong>{BRAND}</strong><span>How can we help?</span></div><button type="button" class="icon-btn" id="chatClose" aria-label="Close chat">{ic("close")}</button></div>
 <div class="chat-body" id="chatBody" aria-live="polite"></div>

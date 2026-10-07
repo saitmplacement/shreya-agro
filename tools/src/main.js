@@ -393,16 +393,26 @@
   var chatBody = $('#chatBody');
   var chatStarted = false;
   var ICON_ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+  var ICON_BOT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>';
   function closeChat() {
     if (!chatPanel || chatPanel.hidden) return;
     chatPanel.hidden = true;
     chatFab.setAttribute('aria-expanded', 'false');
   }
   function addMsg(text, who) {
+    var row = doc.createElement('div');
+    row.className = 'msg-row ' + who;
+    if (who === 'bot') {
+      var ic = doc.createElement('div');
+      ic.className = 'msg-icon';
+      ic.innerHTML = ICON_BOT;
+      row.appendChild(ic);
+    }
     var m = doc.createElement('div');
     m.className = 'msg ' + who;
     m.textContent = text;
-    chatBody.appendChild(m);
+    row.appendChild(m);
+    chatBody.appendChild(row);
     chatBody.scrollTop = chatBody.scrollHeight;
   }
   function addOptions(opts) {

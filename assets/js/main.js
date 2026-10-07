@@ -1,4 +1,505 @@
-(function(){"use strict";var s=window.SHREYA_CONFIG||{},l=document,F=l.body;function i(t,a){return(a||l).querySelector(t)}function v(t,a){return Array.prototype.slice.call((a||l).querySelectorAll(t))}if(s.gaId&&/^G-[A-Z0-9]+$/.test(s.gaId)){window.dataLayer=window.dataLayer||[],window.gtag=function(){window.dataLayer.push(arguments)},window.gtag("js",new Date),window.gtag("config",s.gaId);var W=l.createElement("script");W.async=!0,W.src="https://www.googletagmanager.com/gtag/js?id="+s.gaId,l.head.appendChild(W)}function p(t,a){typeof window.gtag=="function"&&window.gtag("event",t,a||{})}F.getAttribute("data-product")&&p("view_item",{item_name:F.getAttribute("data-product"),item_category:F.getAttribute("data-category")||""}),l.addEventListener("click",function(t){var a=t.target.closest?t.target.closest("a[href]"):null;if(a){var e=a.getAttribute("href")||"";e.indexOf("tel:")===0?p("phone_click",{link_url:e}):e.indexOf("mailto:")===0?p("email_click",{link_url:e}):(e.indexOf("wa.me")>-1||e.indexOf("whatsapp")>-1)&&p("whatsapp_click",{link_url:e})}});var h=i("#navToggle"),C=i("#mainNav");function T(){C&&(C.classList.remove("open"),h&&(h.setAttribute("aria-expanded","false"),h.setAttribute("aria-label","Open menu")))}h&&C&&(h.addEventListener("click",function(){var t=C.classList.toggle("open");h.setAttribute("aria-expanded",t?"true":"false"),h.setAttribute("aria-label",t?"Close menu":"Open menu")}),C.addEventListener("click",function(t){t.target.closest("a, button")&&T()}),l.addEventListener("click",function(t){C.classList.contains("open")&&!t.target.closest("#mainNav")&&!t.target.closest("#navToggle")&&T()}),window.addEventListener("resize",function(){window.innerWidth>991&&T()}));var y=null,D=null;function K(t){return v('a[href], button:not([disabled]), input:not([disabled]):not([type="hidden"]), select, textarea, [tabindex]:not([tabindex="-1"])',t).filter(function(a){return a.offsetParent!==null})}function V(t){if(t){k(),T(),D=l.activeElement,t.hidden=!1,F.classList.add("modal-open"),y=t;var a=K(t.querySelector(".modal-dialog")),e=a.filter(function(r){return/^(INPUT|SELECT|TEXTAREA)$/.test(r.tagName)&&!r.closest(".hp")})[0];(e||a[0]||t).focus({preventScroll:!0})}}function z(){y&&(y.hidden=!0,F.classList.remove("modal-open"),y=null,D&&D.focus&&D.focus({preventScroll:!0}))}l.addEventListener("click",function(t){t.target.closest("[data-close-modal]")&&z()}),l.addEventListener("keydown",function(t){if(t.key==="Escape"&&(y?z():(k(),T())),t.key==="Tab"&&y){var a=K(y.querySelector(".modal-dialog"));if(!a.length)return;var e=a[0],r=a[a.length-1];t.shiftKey&&l.activeElement===e?(t.preventDefault(),r.focus()):!t.shiftKey&&l.activeElement===r&&(t.preventDefault(),e.focus())}});var R=i("#enquiryModal");function b(t,a){var e=i(t);e&&(e.textContent=a||"")}function j(t){if(R){t=t||{};var a=i("#enquiryForm"),e=i(".modal-dialog",R);a.reset(),Z(a),i("#enquiryFormWrap").hidden=!1,i("#enquirySuccess").hidden=!0;var r=!!t.product,o=i("#enquiryAside"),n=i("#enquiryProductField"),c=i("#enquiryProduct"),f=i("#enquiryProductSelectWrap"),P=i("#enquiryProductSelect");if(e.classList.toggle("no-aside",!r),o.hidden=!r,n.hidden=!r,f.hidden=r,P.value="",r){b("#enquiryTitle","Interested in this product?"),b("#enquiryProductName",t.product),c.value=t.product;var x=i("#enquiryAsideImg");t.image?(x.src=t.image,x.alt="Shreya Agro Foods "+t.product,x.hidden=!1):x.hidden=!0,b("#enquiryAsideName",t.product),b("#enquiryAsideDesc",t.desc||"");var O=i("#enquiryAsidePacks");O.innerHTML="",(t.packs||"").split(",").map(function(d){return d.trim()}).filter(Boolean).forEach(function(d){var g=l.createElement("span");g.textContent=d,O.appendChild(g)}),b("#enquiryIntro","Share your details and our B2B team will get in touch with you.")}else b("#enquiryTitle",t.title||"B2B Product Enquiry"),c.value="",b("#enquiryIntro","Tell us what you are looking for and our B2B team will get in touch with you shortly.");i("#enquiryType").value=t.type||(r?"Product Enquiry":"B2B Enquiry"),V(R),p("enquiry_click",{item_name:t.product||"",enquiry_type:t.type||""})}}l.addEventListener("click",function(t){var a=t.target.closest("[data-enquiry]");a&&(t.preventDefault(),j({product:a.getAttribute("data-product")||"",image:a.getAttribute("data-image")||"",desc:a.getAttribute("data-desc")||"",packs:a.getAttribute("data-packs")||"",type:a.getAttribute("data-type")||"",title:a.getAttribute("data-title")||""}))});var Y=i("#applyModal");l.addEventListener("click",function(t){var a=t.target.closest("[data-apply]");if(!(!a||!Y)){t.preventDefault();var e=i("#applyForm");e.reset(),Z(e),i("#applyFormWrap").hidden=!1,i("#applySuccess").hidden=!0;var r=a.getAttribute("data-apply")||"General Application";b("#applyPosition",r),i("#applyPositionInput").value=r,V(Y),p("career_apply_click",{job_title:r})}});var dt=/^[+]?[0-9][0-9\s-]{7,16}$/,st=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;function X(t,a){var e=t.closest(".field"),r=e&&i(".field-error",e);a?(t.setAttribute("aria-invalid","true"),r&&(r.textContent=a,r.hidden=!1)):(t.removeAttribute("aria-invalid"),r&&(r.textContent="",r.hidden=!0))}function Z(t){v("input, select, textarea",t).forEach(function(r){X(r,"")});var a=i(".form-status",t);a&&(a.hidden=!0,a.textContent="");var e=i('button[type="submit"]',t);e&&(e.disabled=!1,e.getAttribute("data-label")&&(e.querySelector(".label").textContent=e.getAttribute("data-label")))}function J(t){if(t.type==="hidden"||t.closest(".hp")||t.hidden||t.closest("[hidden]"))return!0;var a=(t.value||"").trim(),e="";if(t.required&&!a)e="This field is required.";else if(a&&t.type==="tel"&&!dt.test(a))e="Enter a valid mobile number.";else if(a&&t.type==="email"&&!st.test(a))e="Enter a valid email address.";else if(t.type==="file"&&t.files&&t.files[0]){var r=t.files[0];/\.(pdf|doc|docx)$/i.test(r.name)?r.size>5*1024*1024&&(e="File is too large (max 5 MB)."):e="Please upload a PDF or DOC file."}return X(t,e),!e}v("form[data-form]").forEach(function(t){t.setAttribute("novalidate","novalidate"),t.addEventListener("input",function(a){a.target.getAttribute&&a.target.getAttribute("aria-invalid")&&J(a.target)}),t.addEventListener("submit",function(a){a.preventDefault();var e=v("input, select, textarea",t),r=null;if(e.forEach(function(n){!J(n)&&!r&&(r=n)}),r){r.focus();return}var o=i(".hp input",t);o&&o.value||ft(t)})});function Q(t,a){var e=t.getAttribute("data-wrap"),r=t.getAttribute("data-success"),o=e&&i("#"+e),n=r&&i("#"+r);if(o&&(o.hidden=!0),n){n.hidden=!1;var c=i("h3",n),f=i("p",n);c&&!n.getAttribute("data-ok-title")&&n.setAttribute("data-ok-title",c.textContent),f&&!n.getAttribute("data-ok-text")&&n.setAttribute("data-ok-text",f.textContent),c&&(c.textContent=a&&n.getAttribute("data-fallback-title")||n.getAttribute("data-ok-title")),f&&(f.textContent=a&&n.getAttribute("data-fallback-text")||n.getAttribute("data-ok-text")),c&&(c.setAttribute("tabindex","-1"),c.focus({preventScroll:!0})),n.scrollIntoView&&!n.closest(".modal")&&n.scrollIntoView({behavior:"smooth",block:"center"})}}function ft(t){var a=i('button[type="submit"]',t),e=a&&a.querySelector(".label"),r=i(".form-status",t),o=t.getAttribute("data-form"),n=new FormData(t);n.delete("botcheck"),n.set("page_url",window.location.href);var c=o==="apply"?"career_application":o==="partner"?"b2b_partner_enquiry":"generate_lead",f=t.getAttribute("data-subject")||"New website enquiry",P=n.get("product")||n.get("product_interest")||n.get("position")||"";if(P&&(f+=" \u2014 "+P),n.set("subject",f),n.set("from_name","Shreya Agro Foods Website"),a&&(a.disabled=!0,e&&(a.setAttribute("data-label",e.textContent),e.textContent="Sending\u2026")),r&&(r.hidden=!0),s.web3formsKey){n.set("access_key",s.web3formsKey),fetch("https://api.web3forms.com/submit",{method:"POST",body:n,headers:{Accept:"application/json"}}).then(function(d){return d.json()}).then(function(d){if(d&&d.success)p(c,{form:o,item_name:P}),Q(t,!1);else throw new Error(d&&d.message||"Submission failed")}).catch(function(){a&&(a.disabled=!1,e&&(e.textContent=a.getAttribute("data-label")||e.textContent)),r&&(r.textContent="Sorry, we could not send your message. Please try again, or call us on "+(s.phoneDisplay||"")+".",r.hidden=!1)});return}var x=[];n.forEach(function(d,g){g==="access_key"||g==="subject"||g==="from_name"||g==="page_url"||typeof d!="string"||!d.trim()||x.push(g.replace(/_/g," ").replace(/^./,function(gt){return gt.toUpperCase()})+": "+d.trim())});var O="mailto:"+(s.email||"info@shreyaagrofoods.com")+"?subject="+encodeURIComponent(f)+"&body="+encodeURIComponent(x.join(`
-`)+`
+(function () {
+  'use strict';
 
-Sent from: `+window.location.href);p(c,{form:o,item_name:P}),Q(t,!0),window.location.href=O}(function(){var t=i("#g_type");if(t){var a=new URLSearchParams(window.location.search).get("enquiry");a&&v("option",t).forEach(function(e){e.value===a&&(t.value=a)})}})();var H=i("#productGrid");if(H){let t=function(){var e=[];u.cat==="all"?Object.keys(A).forEach(function(r){A[r].forEach(function(o){e.indexOf(o)<0&&e.push(o)})}):e=A[u.cat]||[],e.sort(),w.innerHTML='<option value="all">All sub-categories</option>'+e.map(function(r){return'<option value="'+r.replace(/"/g,"&quot;")+'">'+r+"</option>"}).join(""),w.value=u.sub,w.value!==u.sub&&(u.sub="all",w.value="all")},a=function(){var e=0,r=u.q.trim().toLowerCase();tt.forEach(function(o){var n=(u.cat==="all"||o.getAttribute("data-category")===u.cat)&&(u.sub==="all"||o.getAttribute("data-type")===u.sub)&&(!r||o.getAttribute("data-search").indexOf(r)>-1);o.hidden=!n,n&&e++}),et&&(et.textContent=e+(e===1?" product":" products")),at&&(at.hidden=e!==0),H.hidden=e===0,$.forEach(function(o){o.setAttribute("aria-pressed",o.getAttribute("data-filter")===u.cat?"true":"false")})};var tt=v(".product-card",H),m=i("#productSearch"),w=i("#subcategory"),$=v(".chip[data-filter]"),et=i("#resultCount"),at=i("#noResults"),u={cat:"all",sub:"all",q:""},A={};tt.forEach(function(e){var r=e.getAttribute("data-category"),o=e.getAttribute("data-type");A[r]=A[r]||[],A[r].indexOf(o)<0&&A[r].push(o)}),$.forEach(function(e){e.addEventListener("click",function(){u.cat=e.getAttribute("data-filter"),u.sub="all",t(),a(),window.history&&history.replaceState&&history.replaceState(null,"",u.cat==="all"?window.location.pathname:"?category="+u.cat)})}),w&&w.addEventListener("change",function(){u.sub=w.value,a()}),m&&m.addEventListener("input",function(){u.q=m.value,a()});var G=new URLSearchParams(window.location.search).get("category");G&&$.some(function(e){return e.getAttribute("data-filter")===G})&&(u.cat=G),t(),a(),window.location.hash==="#search"&&m&&window.setTimeout(function(){m.focus()},300);var rt=i("#resetFilters");rt&&rt.addEventListener("click",function(){u={cat:"all",sub:"all",q:""},m&&(m.value=""),t(),a()})}var E=i("#galleryMain");E&&v(".gallery-thumbs button").forEach(function(t){t.addEventListener("click",function(){E.src=t.getAttribute("data-src"),E.srcset=t.getAttribute("data-srcset")||"",E.alt=t.getAttribute("data-alt")||E.alt,E.classList.toggle("fit-contain",t.getAttribute("data-fit")==="contain"),E.classList.toggle("pos-low",t.getAttribute("data-fit")==="low"),v(".gallery-thumbs button").forEach(function(a){a.removeAttribute("aria-current")}),t.setAttribute("aria-current","true")})});var I=i("#chatFab"),L=i("#chatPanel"),_=i("#chatBody"),it=!1,vt='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';function k(){!L||L.hidden||(L.hidden=!0,I.setAttribute("aria-expanded","false"))}function q(t,a){var e=l.createElement("div");e.className="msg "+a,e.textContent=t,_.appendChild(e),_.scrollTop=_.scrollHeight}function S(t){var a=l.createElement("div");a.className="chat-options",t.forEach(function(e){var r;e.href?(r=l.createElement("a"),r.href=e.href,e.external&&(r.target="_blank",r.rel="noopener")):(r=l.createElement("button"),r.type="button"),r.innerHTML=vt+"<span></span>",r.querySelector("span").textContent=e.label,e.action?r.addEventListener("click",function(){e.say&&q(e.label,"user"),a.remove(),e.action()}):e.href&&r.addEventListener("click",function(){!e.external&&e.href.charAt(0)!=="#"&&k()}),a.appendChild(r)}),_.appendChild(a),_.scrollTop=_.scrollHeight}function B(){q("Hi! How can we help you?","bot"),S([{label:"Product Enquiry",say:!0,action:function(){q("Great! Choose a product from our catalogue, or send us a general product enquiry and our B2B team will get back to you.","bot"),S([{label:"Send a Product Enquiry",action:function(){k(),j({type:"Product Enquiry",title:"Product Enquiry"})}},{label:"Browse Products",href:"/products/"},{label:"Back to menu",action:B}])}},{label:"B2B Partnership",say:!0,action:function(){q("We work with distributors, wholesalers and retailers across India. Tell us about your business and we will get in touch.","bot"),S([{label:"Become a B2B Partner",href:"/vendor/"},{label:"Make a B2B Enquiry",action:function(){k(),j({type:"B2B / Wholesale"})}},{label:"Back to menu",action:B}])}},{label:"Become a Distributor",say:!0,action:function(){q("Wonderful! Share your details and our team will contact you about distribution opportunities.","bot"),S([{label:"Apply for Distribution",action:function(){k(),j({type:"Distribution",title:"Distribution Enquiry"})}},{label:"Back to menu",action:B}])}},{label:"Careers",say:!0,action:function(){q("We are always looking for passionate people to join us. See our current openings and apply online.","bot"),S([{label:"View Current Openings",href:"/contact-us/#careers"},{label:"Back to menu",action:B}])}},{label:"Talk to Our Team",say:!0,action:function(){q("You can reach our team directly (Mon\u2013Fri 10am\u20136pm, Sat 10am\u20132pm):","bot"),S([{label:"Call "+(s.phoneDisplay||""),href:"tel:"+(s.phoneTel||"")},{label:"WhatsApp us",href:"https://wa.me/"+(s.whatsapp||""),external:!0},{label:"Email "+(s.email||""),href:"mailto:"+(s.email||"")},{label:"Contact page",href:"/contact-us/"},{label:"Back to menu",action:B}])}}])}if(I&&L){I.addEventListener("click",function(){var t=L.hidden;L.hidden=!t,I.setAttribute("aria-expanded",t?"true":"false"),t&&!it&&(it=!0,B())});var nt=i("#chatClose");nt&&nt.addEventListener("click",function(){k(),I.focus()})}var U=i("#orbit");if(U){var ot=i(".orbit-track",U),lt=v("li",ot),pt=i("#orbitTipName"),bt=i("#orbitTipFlag"),N=null,ut=function(){var t=0,a=/matrix\(([^)]+)\)/.exec(window.getComputedStyle(ot).transform||"");if(a){var e=a[1].split(",");t=Math.atan2(parseFloat(e[1]),parseFloat(e[0]))*180/Math.PI}var r=lt[0],o=999;lt.forEach(function(n){var c=parseFloat(n.style.getPropertyValue("--a"))+t,f=Math.abs(((c-270)%360+540)%360-180);f<o&&(o=f,r=n)}),r!==N&&(N&&N.classList.remove("is-active"),N=r,r.classList.add("is-active"),pt.textContent=r.getAttribute("data-name"),bt.src=r.getAttribute("data-flag"))};ut();var M=null,ct=function(t){t&&!M&&(M=window.setInterval(ut,400)),!t&&M&&(window.clearInterval(M),M=null)};"IntersectionObserver"in window?new IntersectionObserver(function(t){ct(t[0].isIntersecting)}).observe(U):ct(!0)}})();
+  var CFG = window.SHREYA_CONFIG || {};
+  var doc = document;
+  var body = doc.body;
+
+  function $(sel, ctx) { return (ctx || doc).querySelector(sel); }
+  function $$(sel, ctx) { return Array.prototype.slice.call((ctx || doc).querySelectorAll(sel)); }
+
+  /* ---------- Analytics (GA4, only when an ID is configured) ---------- */
+  if (CFG.gaId && /^G-[A-Z0-9]+$/.test(CFG.gaId)) {
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    window.gtag('js', new Date());
+    window.gtag('config', CFG.gaId);
+    var gs = doc.createElement('script');
+    gs.async = true;
+    gs.src = 'https://www.googletagmanager.com/gtag/js?id=' + CFG.gaId;
+    doc.head.appendChild(gs);
+  }
+  function track(name, params) {
+    if (typeof window.gtag === 'function') { window.gtag('event', name, params || {}); }
+  }
+  if (body.getAttribute('data-product')) {
+    track('view_item', { item_name: body.getAttribute('data-product'), item_category: body.getAttribute('data-category') || '' });
+  }
+  doc.addEventListener('click', function (e) {
+    var a = e.target.closest ? e.target.closest('a[href]') : null;
+    if (!a) return;
+    var href = a.getAttribute('href') || '';
+    if (href.indexOf('tel:') === 0) track('phone_click', { link_url: href });
+    else if (href.indexOf('mailto:') === 0) track('email_click', { link_url: href });
+    else if (href.indexOf('wa.me') > -1 || href.indexOf('whatsapp') > -1) track('whatsapp_click', { link_url: href });
+  });
+
+  /* ---------- Mobile navigation ---------- */
+  var navToggle = $('#navToggle');
+  var mainNav = $('#mainNav');
+  function closeNav() {
+    if (!mainNav) return;
+    mainNav.classList.remove('open');
+    if (navToggle) { navToggle.setAttribute('aria-expanded', 'false'); navToggle.setAttribute('aria-label', 'Open menu'); }
+  }
+  if (navToggle && mainNav) {
+    navToggle.addEventListener('click', function () {
+      var open = mainNav.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    });
+    mainNav.addEventListener('click', function (e) { if (e.target.closest('a, button')) closeNav(); });
+    doc.addEventListener('click', function (e) {
+      if (!mainNav.classList.contains('open')) return;
+      if (!e.target.closest('#mainNav') && !e.target.closest('#navToggle')) closeNav();
+    });
+    window.addEventListener('resize', function () { if (window.innerWidth > 991) closeNav(); });
+  }
+
+  /* ---------- Modals ---------- */
+  var activeModal = null;
+  var lastFocus = null;
+  function focusables(root) {
+    return $$('a[href], button:not([disabled]), input:not([disabled]):not([type="hidden"]), select, textarea, [tabindex]:not([tabindex="-1"])', root)
+      .filter(function (el) { return el.offsetParent !== null; });
+  }
+  function openModal(modal) {
+    if (!modal) return;
+    closeChat();
+    closeNav();
+    lastFocus = doc.activeElement;
+    modal.hidden = false;
+    body.classList.add('modal-open');
+    activeModal = modal;
+    var f = focusables(modal.querySelector('.modal-dialog'));
+    var firstField = f.filter(function (el) { return /^(INPUT|SELECT|TEXTAREA)$/.test(el.tagName) && !el.closest('.hp'); })[0];
+    (firstField || f[0] || modal).focus({ preventScroll: true });
+  }
+  function closeModal() {
+    if (!activeModal) return;
+    activeModal.hidden = true;
+    body.classList.remove('modal-open');
+    activeModal = null;
+    if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
+  }
+  doc.addEventListener('click', function (e) {
+    if (e.target.closest('[data-close-modal]')) closeModal();
+  });
+  doc.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      if (activeModal) closeModal();
+      else { closeChat(); closeNav(); }
+    }
+    if (e.key === 'Tab' && activeModal) {
+      var f = focusables(activeModal.querySelector('.modal-dialog'));
+      if (!f.length) return;
+      var first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && doc.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && doc.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
+
+  /* ---------- Enquiry modal ---------- */
+  var enquiryModal = $('#enquiryModal');
+  function setText(id, text) { var el = $(id); if (el) el.textContent = text || ''; }
+  function openEnquiry(opts) {
+    if (!enquiryModal) return;
+    opts = opts || {};
+    var form = $('#enquiryForm');
+    var dialog = $('.modal-dialog', enquiryModal);
+    form.reset();
+    resetFormState(form);
+    $('#enquiryFormWrap').hidden = false;
+    $('#enquirySuccess').hidden = true;
+
+    var hasProduct = !!opts.product;
+    var aside = $('#enquiryAside');
+    var productField = $('#enquiryProductField');
+    var productInput = $('#enquiryProduct');
+    var productSelectWrap = $('#enquiryProductSelectWrap');
+    var productSelect = $('#enquiryProductSelect');
+    dialog.classList.toggle('no-aside', !hasProduct);
+    aside.hidden = !hasProduct;
+    productField.hidden = !hasProduct;
+    productSelectWrap.hidden = hasProduct;
+    productSelect.value = '';
+
+    if (hasProduct) {
+      setText('#enquiryTitle', 'Interested in this product?');
+      setText('#enquiryProductName', opts.product);
+      productInput.value = opts.product;
+      var img = $('#enquiryAsideImg');
+      if (opts.image) { img.src = opts.image; img.alt = 'Shreya Agro Foods ' + opts.product; img.hidden = false; } else { img.hidden = true; }
+      setText('#enquiryAsideName', opts.product);
+      setText('#enquiryAsideDesc', opts.desc || '');
+      var tags = $('#enquiryAsidePacks');
+      tags.innerHTML = '';
+      (opts.packs || '').split(',').map(function (s) { return s.trim(); }).filter(Boolean).forEach(function (p) {
+        var s = doc.createElement('span'); s.textContent = p; tags.appendChild(s);
+      });
+      setText('#enquiryIntro', 'Share your details and our B2B team will get in touch with you.');
+    } else {
+      setText('#enquiryTitle', opts.title || 'B2B Product Enquiry');
+      productInput.value = '';
+      setText('#enquiryIntro', 'Tell us what you are looking for and our B2B team will get in touch with you shortly.');
+    }
+    $('#enquiryType').value = opts.type || (hasProduct ? 'Product Enquiry' : 'B2B Enquiry');
+    openModal(enquiryModal);
+    track('enquiry_click', { item_name: opts.product || '', enquiry_type: opts.type || '' });
+  }
+  doc.addEventListener('click', function (e) {
+    var btn = e.target.closest('[data-enquiry]');
+    if (!btn) return;
+    e.preventDefault();
+    openEnquiry({
+      product: btn.getAttribute('data-product') || '',
+      image: btn.getAttribute('data-image') || '',
+      desc: btn.getAttribute('data-desc') || '',
+      packs: btn.getAttribute('data-packs') || '',
+      type: btn.getAttribute('data-type') || '',
+      title: btn.getAttribute('data-title') || ''
+    });
+  });
+
+  /* ---------- Job application modal ---------- */
+  var applyModal = $('#applyModal');
+  doc.addEventListener('click', function (e) {
+    var btn = e.target.closest('[data-apply]');
+    if (!btn || !applyModal) return;
+    e.preventDefault();
+    var form = $('#applyForm');
+    form.reset();
+    resetFormState(form);
+    $('#applyFormWrap').hidden = false;
+    $('#applySuccess').hidden = true;
+    var pos = btn.getAttribute('data-apply') || 'General Application';
+    setText('#applyPosition', pos);
+    $('#applyPositionInput').value = pos;
+    openModal(applyModal);
+    track('career_apply_click', { job_title: pos });
+  });
+
+  /* ---------- Forms ---------- */
+  var MOBILE_RE = /^[+]?[0-9][0-9\s-]{7,16}$/;
+  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+  function fieldError(input, msg) {
+    var wrap = input.closest('.field');
+    var err = wrap && $('.field-error', wrap);
+    if (msg) {
+      input.setAttribute('aria-invalid', 'true');
+      if (err) { err.textContent = msg; err.hidden = false; }
+    } else {
+      input.removeAttribute('aria-invalid');
+      if (err) { err.textContent = ''; err.hidden = true; }
+    }
+  }
+  function resetFormState(form) {
+    $$('input, select, textarea', form).forEach(function (i) { fieldError(i, ''); });
+    var st = $('.form-status', form);
+    if (st) { st.hidden = true; st.textContent = ''; }
+    var btn = $('button[type="submit"]', form);
+    if (btn) { btn.disabled = false; if (btn.getAttribute('data-label')) btn.querySelector('.label').textContent = btn.getAttribute('data-label'); }
+  }
+  function validateField(input) {
+    if (input.type === 'hidden' || input.closest('.hp') || input.hidden || input.closest('[hidden]')) return true;
+    var v = (input.value || '').trim();
+    var msg = '';
+    if (input.required && !v) msg = 'This field is required.';
+    else if (v && input.type === 'tel' && !MOBILE_RE.test(v)) msg = 'Enter a valid mobile number.';
+    else if (v && input.type === 'email' && !EMAIL_RE.test(v)) msg = 'Enter a valid email address.';
+    else if (input.type === 'file' && input.files && input.files[0]) {
+      var file = input.files[0];
+      if (!/\.(pdf|doc|docx)$/i.test(file.name)) msg = 'Please upload a PDF or DOC file.';
+      else if (file.size > 5 * 1024 * 1024) msg = 'File is too large (max 5 MB).';
+    }
+    fieldError(input, msg);
+    return !msg;
+  }
+  $$('form[data-form]').forEach(function (form) {
+    form.setAttribute('novalidate', 'novalidate');
+    // Validate on submit (not on blur: an error appearing under a field would shift the layout and swallow the click on Submit).
+    form.addEventListener('input', function (e) { if (e.target.getAttribute && e.target.getAttribute('aria-invalid')) validateField(e.target); });
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var inputs = $$('input, select, textarea', form);
+      var firstBad = null;
+      inputs.forEach(function (i) { if (!validateField(i) && !firstBad) firstBad = i; });
+      if (firstBad) { firstBad.focus(); return; }
+      var hp = $('.hp input', form);
+      if (hp && hp.value) return; // bot
+      submitForm(form);
+    });
+  });
+
+  function showSuccess(form, fallback) {
+    var wrapId = form.getAttribute('data-wrap');
+    var succId = form.getAttribute('data-success');
+    var wrap = wrapId && $('#' + wrapId);
+    var succ = succId && $('#' + succId);
+    if (wrap) wrap.hidden = true;
+    if (succ) {
+      succ.hidden = false;
+      var h = $('h3', succ);
+      var p = $('p', succ);
+      if (h && !succ.getAttribute('data-ok-title')) succ.setAttribute('data-ok-title', h.textContent);
+      if (p && !succ.getAttribute('data-ok-text')) succ.setAttribute('data-ok-text', p.textContent);
+      // No form service configured yet: be honest that the visitor still has to press Send in their email app.
+      if (h) h.textContent = (fallback && succ.getAttribute('data-fallback-title')) || succ.getAttribute('data-ok-title');
+      if (p) p.textContent = (fallback && succ.getAttribute('data-fallback-text')) || succ.getAttribute('data-ok-text');
+      if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); }
+      if (succ.scrollIntoView && !succ.closest('.modal')) succ.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+  function submitForm(form) {
+    var btn = $('button[type="submit"]', form);
+    var label = btn && btn.querySelector('.label');
+    var status = $('.form-status', form);
+    var kind = form.getAttribute('data-form');
+    var data = new FormData(form);
+    data.delete('botcheck');
+    data.set('page_url', window.location.href);
+    var evt = kind === 'apply' ? 'career_application' : (kind === 'partner' ? 'b2b_partner_enquiry' : 'generate_lead');
+    var subject = form.getAttribute('data-subject') || 'New website enquiry';
+    var product = data.get('product') || data.get('product_interest') || data.get('position') || '';
+    if (product) subject += ' — ' + product;
+    data.set('subject', subject);
+    data.set('from_name', 'Shreya Agro Foods Website');
+
+    if (btn) { btn.disabled = true; if (label) { btn.setAttribute('data-label', label.textContent); label.textContent = 'Sending…'; } }
+    if (status) status.hidden = true;
+
+    if (CFG.web3formsKey) {
+      data.set('access_key', CFG.web3formsKey);
+      fetch('https://api.web3forms.com/submit', { method: 'POST', body: data, headers: { Accept: 'application/json' } })
+        .then(function (r) { return r.json(); })
+        .then(function (res) {
+          if (res && res.success) { track(evt, { form: kind, item_name: product }); showSuccess(form, false); }
+          else { throw new Error((res && res.message) || 'Submission failed'); }
+        })
+        .catch(function () {
+          if (btn) { btn.disabled = false; if (label) label.textContent = btn.getAttribute('data-label') || label.textContent; }
+          if (status) { status.textContent = 'Sorry, we could not send your message. Please try again, or call us on ' + (CFG.phoneDisplay || '') + '.'; status.hidden = false; }
+        });
+      return;
+    }
+
+    // No Web3Forms key configured yet: open the visitor's email app with the enquiry pre-filled.
+    var lines = [];
+    data.forEach(function (v, k) {
+      if (k === 'access_key' || k === 'subject' || k === 'from_name' || k === 'page_url' || typeof v !== 'string' || !v.trim()) return;
+      lines.push(k.replace(/_/g, ' ').replace(/^./, function (c) { return c.toUpperCase(); }) + ': ' + v.trim());
+    });
+    var mailto = 'mailto:' + (CFG.email || 'info@shreyaagrofoods.com') + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(lines.join('\n') + '\n\nSent from: ' + window.location.href);
+    track(evt, { form: kind, item_name: product });
+    showSuccess(form, true);
+    window.location.href = mailto;
+  }
+
+  /* Preselect enquiry type from ?enquiry= on the contact page */
+  (function () {
+    var sel = $('#g_type');
+    if (!sel) return;
+    var preset = new URLSearchParams(window.location.search).get('enquiry');
+    if (!preset) return;
+    $$('option', sel).forEach(function (o) { if (o.value === preset) sel.value = preset; });
+  })();
+
+  /* ---------- Product listing: search + filters ---------- */
+  var grid = $('#productGrid');
+  if (grid) {
+    var cards = $$('.product-card', grid);
+    var searchInput = $('#productSearch');
+    var subSelect = $('#subcategory');
+    var chips = $$('.chip[data-filter]');
+    var count = $('#resultCount');
+    var noRes = $('#noResults');
+    var state = { cat: 'all', sub: 'all', q: '' };
+
+    var subOptions = {};
+    cards.forEach(function (c) {
+      var cat = c.getAttribute('data-category'), t = c.getAttribute('data-type');
+      subOptions[cat] = subOptions[cat] || [];
+      if (subOptions[cat].indexOf(t) < 0) subOptions[cat].push(t);
+    });
+    function fillSub() {
+      var list = [];
+      if (state.cat === 'all') { Object.keys(subOptions).forEach(function (k) { subOptions[k].forEach(function (t) { if (list.indexOf(t) < 0) list.push(t); }); }); }
+      else list = subOptions[state.cat] || [];
+      list.sort();
+      subSelect.innerHTML = '<option value="all">All sub-categories</option>' + list.map(function (t) { return '<option value="' + t.replace(/"/g, '&quot;') + '">' + t + '</option>'; }).join('');
+      subSelect.value = state.sub;
+      if (subSelect.value !== state.sub) { state.sub = 'all'; subSelect.value = 'all'; }
+    }
+    function apply() {
+      var shown = 0;
+      var q = state.q.trim().toLowerCase();
+      cards.forEach(function (c) {
+        var ok = (state.cat === 'all' || c.getAttribute('data-category') === state.cat) &&
+          (state.sub === 'all' || c.getAttribute('data-type') === state.sub) &&
+          (!q || c.getAttribute('data-search').indexOf(q) > -1);
+        c.hidden = !ok;
+        if (ok) shown++;
+      });
+      if (count) count.textContent = shown + (shown === 1 ? ' product' : ' products');
+      if (noRes) noRes.hidden = shown !== 0;
+      grid.hidden = shown === 0;
+      chips.forEach(function (ch) { ch.setAttribute('aria-pressed', ch.getAttribute('data-filter') === state.cat ? 'true' : 'false'); });
+    }
+    chips.forEach(function (ch) {
+      ch.addEventListener('click', function () {
+        state.cat = ch.getAttribute('data-filter');
+        state.sub = 'all';
+        fillSub();
+        apply();
+        if (window.history && history.replaceState) history.replaceState(null, '', state.cat === 'all' ? window.location.pathname : '?category=' + state.cat);
+      });
+    });
+    if (subSelect) subSelect.addEventListener('change', function () { state.sub = subSelect.value; apply(); });
+    if (searchInput) searchInput.addEventListener('input', function () { state.q = searchInput.value; apply(); });
+    var initial = new URLSearchParams(window.location.search).get('category');
+    if (initial && chips.some(function (c) { return c.getAttribute('data-filter') === initial; })) state.cat = initial;
+    fillSub();
+    apply();
+    if (window.location.hash === '#search' && searchInput) { window.setTimeout(function () { searchInput.focus(); }, 300); }
+    var reset = $('#resetFilters');
+    if (reset) reset.addEventListener('click', function () {
+      state = { cat: 'all', sub: 'all', q: '' };
+      if (searchInput) searchInput.value = '';
+      fillSub(); apply();
+    });
+  }
+
+  /* ---------- Product gallery ---------- */
+  var mainImg = $('#galleryMain');
+  if (mainImg) {
+    $$('.gallery-thumbs button').forEach(function (b) {
+      b.addEventListener('click', function () {
+        mainImg.src = b.getAttribute('data-src');
+        mainImg.srcset = b.getAttribute('data-srcset') || '';
+        mainImg.alt = b.getAttribute('data-alt') || mainImg.alt;
+        mainImg.classList.toggle('fit-contain', b.getAttribute('data-fit') === 'contain');
+        mainImg.classList.toggle('pos-low', b.getAttribute('data-fit') === 'low');
+        $$('.gallery-thumbs button').forEach(function (o) { o.removeAttribute('aria-current'); });
+        b.setAttribute('aria-current', 'true');
+      });
+    });
+  }
+
+  /* ---------- Chatbot ---------- */
+  var chatFab = $('#chatFab');
+  var chatPanel = $('#chatPanel');
+  var chatBody = $('#chatBody');
+  var chatStarted = false;
+  var ICON_ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+  var ICON_BOT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>';
+  function closeChat() {
+    if (!chatPanel || chatPanel.hidden) return;
+    chatPanel.hidden = true;
+    chatFab.setAttribute('aria-expanded', 'false');
+  }
+  function addMsg(text, who) {
+    var row = doc.createElement('div');
+    row.className = 'msg-row ' + who;
+    if (who === 'bot') {
+      var ic = doc.createElement('div');
+      ic.className = 'msg-icon';
+      ic.innerHTML = ICON_BOT;
+      row.appendChild(ic);
+    }
+    var m = doc.createElement('div');
+    m.className = 'msg ' + who;
+    m.textContent = text;
+    row.appendChild(m);
+    chatBody.appendChild(row);
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }
+  function addOptions(opts) {
+    var wrap = doc.createElement('div');
+    wrap.className = 'chat-options';
+    opts.forEach(function (o) {
+      var el;
+      if (o.href) { el = doc.createElement('a'); el.href = o.href; if (o.external) { el.target = '_blank'; el.rel = 'noopener'; } }
+      else { el = doc.createElement('button'); el.type = 'button'; }
+      el.innerHTML = ICON_ARROW + '<span></span>';
+      el.querySelector('span').textContent = o.label;
+      if (o.action) {
+        el.addEventListener('click', function () {
+          if (o.say) addMsg(o.label, 'user');
+          wrap.remove();
+          o.action();
+        });
+      } else if (o.href) {
+        el.addEventListener('click', function () { if (!o.external && o.href.charAt(0) !== '#') closeChat(); });
+      }
+      wrap.appendChild(el);
+    });
+    chatBody.appendChild(wrap);
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }
+  function chatMenu() {
+    addMsg('Hi! How can we help you?', 'bot');
+    addOptions([
+      { label: 'Product Enquiry', say: true, action: function () { addMsg('Great! Choose a product from our catalogue, or send us a general product enquiry and our B2B team will get back to you.', 'bot'); addOptions([{ label: 'Send a Product Enquiry', action: function () { closeChat(); openEnquiry({ type: 'Product Enquiry', title: 'Product Enquiry' }); } }, { label: 'Browse Products', href: '/products/' }, { label: 'Back to menu', action: chatMenu }]); } },
+      { label: 'B2B Partnership', say: true, action: function () { addMsg('We work with distributors, wholesalers and retailers across India. Tell us about your business and we will get in touch.', 'bot'); addOptions([{ label: 'Become a B2B Partner', href: '/vendor/' }, { label: 'Make a B2B Enquiry', action: function () { closeChat(); openEnquiry({ type: 'B2B / Wholesale' }); } }, { label: 'Back to menu', action: chatMenu }]); } },
+      { label: 'Become a Distributor', say: true, action: function () { addMsg('Wonderful! Share your details and our team will contact you about distribution opportunities.', 'bot'); addOptions([{ label: 'Apply for Distribution', action: function () { closeChat(); openEnquiry({ type: 'Distribution', title: 'Distribution Enquiry' }); } }, { label: 'Back to menu', action: chatMenu }]); } },
+      { label: 'Careers', say: true, action: function () { addMsg('We are always looking for passionate people to join us. See our current openings and apply online.', 'bot'); addOptions([{ label: 'View Current Openings', href: '/contact-us/#careers' }, { label: 'Back to menu', action: chatMenu }]); } },
+      { label: 'Talk to Our Team', say: true, action: function () {
+        addMsg('You can reach our team directly (Mon–Fri 10am–6pm, Sat 10am–2pm):', 'bot');
+        addOptions([
+          { label: 'Call ' + (CFG.phoneDisplay || ''), href: 'tel:' + (CFG.phoneTel || '') },
+          { label: 'WhatsApp us', href: 'https://wa.me/' + (CFG.whatsapp || ''), external: true },
+          { label: 'Email ' + (CFG.email || ''), href: 'mailto:' + (CFG.email || '') },
+          { label: 'Contact page', href: '/contact-us/' },
+          { label: 'Back to menu', action: chatMenu }
+        ]);
+      } }
+    ]);
+  }
+  if (chatFab && chatPanel) {
+    chatFab.addEventListener('click', function () {
+      var open = chatPanel.hidden;
+      chatPanel.hidden = !open;
+      chatFab.setAttribute('aria-expanded', open ? 'true' : 'false');
+      if (open && !chatStarted) { chatStarted = true; chatMenu(); }
+    });
+    var cc = $('#chatClose');
+    if (cc) cc.addEventListener('click', function () { closeChat(); chatFab.focus(); });
+  }
+
+  /* ---------- Global presence orbit: highlight the country nearest the top ---------- */
+  var orbit = $('#orbit');
+  if (orbit) {
+    var orbitTrack = $('.orbit-track', orbit);
+    var items = $$('li', orbitTrack);
+    var tipName = $('#orbitTipName');
+    var tipFlag = $('#orbitTipFlag');
+    var current = null;
+    var updateOrbit = function () {
+      var rot = 0;
+      var m = /matrix\(([^)]+)\)/.exec(window.getComputedStyle(orbitTrack).transform || '');
+      if (m) { var v = m[1].split(','); rot = Math.atan2(parseFloat(v[1]), parseFloat(v[0])) * 180 / Math.PI; }
+      var best = items[0], bestDiff = 999;
+      items.forEach(function (li) {
+        var a = parseFloat(li.style.getPropertyValue('--a')) + rot; // 0deg = 3 o'clock, 270deg = top
+        var diff = Math.abs(((a - 270) % 360 + 540) % 360 - 180);
+        if (diff < bestDiff) { bestDiff = diff; best = li; }
+      });
+      if (best === current) return;
+      if (current) current.classList.remove('is-active');
+      current = best;
+      best.classList.add('is-active');
+      tipName.textContent = best.getAttribute('data-name');
+      tipFlag.src = best.getAttribute('data-flag');
+    };
+    updateOrbit();
+    var timer = null;
+    var run = function (on) {
+      if (on && !timer) timer = window.setInterval(updateOrbit, 400);
+      if (!on && timer) { window.clearInterval(timer); timer = null; }
+    };
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) { run(entries[0].isIntersecting); }).observe(orbit);
+    } else { run(true); }
+  }
+})();
